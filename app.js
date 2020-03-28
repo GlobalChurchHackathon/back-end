@@ -3,9 +3,18 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose')
 const app = express();
 
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Static Routes
 app.get('/', (req, res) => {
   return res.send('Hello World!');
 });
+
+const basicRoutes = require('./routes/basic')
+
+app.use('/basic', basicRoutes);
 
 dotenv.config();
 
