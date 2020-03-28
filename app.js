@@ -3,9 +3,15 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose')
 const app = express();
 
+const userRoutes = require("../back-end/routes/user");
+const profileRoutes = require("../back-end/routes/profile");
+
 app.get('/', (req, res) => {
   return res.send('Hello World!');
 });
+
+app.use('/users', userRoutes);
+app.use('/profiles', profileRoutes);
 
 dotenv.config();
 
