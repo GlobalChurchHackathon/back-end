@@ -1,7 +1,15 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose')
 const app = express();
+
+// Middleware 
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 // Static Routes
 app.get('/', (req, res) => {
@@ -9,10 +17,12 @@ app.get('/', (req, res) => {
 });
 
 // Import Routes
+const usersRoutes = require('./routes/users');
 const basicRoutes = require('./routes/basic');
 
 // Routes
 app.use('/basic', basicRoutes);
+app.use('/users', usersRoutes);
 
 dotenv.config();
 

@@ -2,7 +2,7 @@ const express = require('express')
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 
-const User = require('../models/users');
+const User = require('../models/user');
 const router = express.Router();
 
 //Get Route - Get All Users
@@ -19,7 +19,8 @@ router.post('/', async (req, res) => {
 
     const data = new User({
         _id: mongoose.Types.ObjectId(),
-        userName: req.body.userName,
+        name: req.body.name,
+        email: req.body.email,
         password: hashedPassword
     })
 
