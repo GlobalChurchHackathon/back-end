@@ -1,13 +1,15 @@
 const mongoose = require('mongoose');
 
-const ProfileSchema = new mongoose.Schema({
-    firstName: {
+const ChurchSchema = new mongoose.Schema({
+    name: {
         type: String,
         required: true
     },
-    lastName: {
+    email: {
         type: String,
-        required: true
+    },
+    website: {
+        type: String,
     },
     address1: {
         type: String,
@@ -29,10 +31,13 @@ const ProfileSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    phoneNumber: {
-        type: String,
-        required: true,
+    socialMedia: {
+        socialMedia1: {
+            type: String
+        },
+        socialMedia2: {
+            type: String
+        }
     }
 })
-
-module.exports = User = mongoose.model('profile', ProfileSchema);
+module.exports = User = mongoose.model('church', ChurchSchema);
