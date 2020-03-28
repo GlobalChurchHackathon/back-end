@@ -1,5 +1,12 @@
 # GlobalChurchHackathon - Back End
 
+## API Endpoints
+* localhost:4000 - Get Route ("Hello World")
+* localhost:4000/basic - Get Route ("Received a GET HTTP method")
+* localhost:4000/basic - Post Route ("Received a Post HTTP method")
+* localhost:4000/basic - Put Route ("Received a Put HTTP method")
+* localhost:4000/basic - Delete Route ("Received a Delete HTTP method")
+
 ## How to Use
 1. Clone to your local machine
 2. Create .env in root directory with DB_CONNECTION = "mongodb+srv://YourUserName:YourPassword@ServerName"
