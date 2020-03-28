@@ -7,6 +7,9 @@ app.get('/', (req, res) => {
   return res.send('Hello World!');
 });
 
+const basicRoutes = require('./routes/basic')
+
+app.use('/basic', basicRoutes);
 dotenv.config();
 
 // Connect to DB
