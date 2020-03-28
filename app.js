@@ -12,9 +12,13 @@ app.get('/', (req, res) => {
   return res.send('Hello World!');
 });
 
-const basicRoutes = require('./routes/basic')
+const basicRoutes = require('./routes/basic');
+const userRoutes = require("../back-end/routes/user");
+const profileRoutes = require("../back-end/routes/profile");
 
 app.use('/basic', basicRoutes);
+app.use('/users', userRoutes);
+app.use('/profiles', profileRoutes);
 
 dotenv.config();
 
