@@ -7,6 +7,9 @@
 * localhost:4000/basic - Put Route ("Received a Put HTTP method")
 * localhost:4000/basic - Patch Route ("Received a Patch HTTP method")
 * localhost:4000/basic - Delete Route ("Received a Delete HTTP method")
+* localhout:4000/users - Get Route (Get All Users)
+* localhout:4000/users - Post Route (Post New User)
+* 
 
 ## How to Use
 1. Clone to your local machine
