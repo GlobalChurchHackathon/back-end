@@ -2,13 +2,13 @@
 
 ## Model Schemas
 * UserSchema
-    email
-    password
+  + email
+  + password
 * ProfileSchema:
-    firstName
-    lastName
-    location
-    phoneNumber
+  + firstName
+  + lastName
+  + location
+  + phoneNumber
 
 ## API Endpoints 
 * localhost:4000 - Get Route ("Hello World")
