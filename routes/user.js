@@ -26,9 +26,27 @@ router.post('/', async (req, res) => {
       password: hashedPassword
   })
 
+// PUT route
+router.put("update/:id", async (req, res) => {
+    User.findById(req.params.id)
+    .then(users => {
+        users.firstName = req.body.firstName;
+        users.lastName = req.body.lastName;
+        users.email = req.body.email;
+        users.password = req.body.password;
+
+        users.save()
+        .then(() => res.json('User updated!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+
+});
+
   const savedUser = await data.save();
   res.send(savedUser);
 });
+
 
 
 //finds user
