@@ -2,7 +2,10 @@ const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose')
 const app = express();
-const bodyParser = requre("body-parser");
+const bodyParser = require("body-parser");
+
+// Middleware 
+app.use(bodyParser.json());
 
 const userRoutes = require("../back-end/routes/user");
 const profileRoutes = require("../back-end/routes/profile");
@@ -13,7 +16,6 @@ app.get('/', (req, res) => {
 
 app.use('/users', userRoutes);
 app.use('/profiles', profileRoutes);
-app.use(bodyParser.json());
 
 dotenv.config();
 

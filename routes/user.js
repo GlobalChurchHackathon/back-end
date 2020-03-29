@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
-
+const bcrypt = require('bcrypt')
 
 const User = require("../models/User");
-const Profile = require("../models/Profile");
 
 // GET route
 router.get("/", async (req, res) => {
@@ -12,22 +11,18 @@ router.get("/", async (req, res) => {
 });
 
 //POST route
-router.route("/user/signup").post((req, res) => {
-  let newUser = new User({
-    email: req.body.email,
-    password: shService.hashPassword(req.body.password)
-  });
-  newUser
-    .save()
-    .then(user => {
-      res
-        .status(200)
-        .json({ message: "User added successfully, route to login page" });
-    })
+router.post('/', async (req, res) => {
+  // Hash Passwords
+  let salt = await bcrypt.genSalt(10);
+  let hashedPassword = await bcrypt.hash(req.body.password, salt);
 
-    .catch(err => {
-      res.status(400).send("Failed to create new record");
-    });
+  const data = new User({
+      email: req.body.email,
+      password: hashedPassword
+  })
+
+  const savedUser = await data.save();
+  res.send(savedUser);
 });
 
 // PUT route
