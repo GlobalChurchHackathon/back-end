@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const auth = require('../../middleware/auth');
-const bcyrpt = require('bcryptjs');
+const auth = require('../middleware/auth');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
@@ -70,7 +70,7 @@ router.get('/login', auth, async (req, res) => {
 @access   public */
 
 router.post(
-    "/",
+    "/login",
     [
         check('email', 'Please include a valid email').isEmail(),
         check('password', 'Password is required').exists()
@@ -97,7 +97,7 @@ router.post(
             /*  does the email & password match the user.id? 
                 comparing plain text to encrypted 
             */
-            const isMatch = await bcyrpt.compare(password, user.password);
+            const isMatch = await bcrypt.compare(password, user.password);
 
             if (!isMatch) {
                 return res
