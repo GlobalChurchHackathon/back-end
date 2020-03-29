@@ -2,6 +2,10 @@ const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose')
 const app = express();
+const bodyParser = require("body-parser");
+
+// Middleware 
+app.use(bodyParser.json());
 
 const userRoutes = require("../back-end/routes/user");
 const profileRoutes = require("../back-end/routes/profile");
