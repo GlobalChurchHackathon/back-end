@@ -1,6 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const bcrypt = require('bcrypt')
+const bcyrpt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const config = require("config");
+const { check, validationResult } = require("express-validator");
+
+const auth = require("../middleware/auth");
 
 const User = require("../models/User");
 
@@ -10,65 +15,61 @@ router.get("/", async (req, res) => {
   res.send(users);
 });
 
-// login route - compare passwords and return JWT 
-// token with _id and admin fields - secured
-router.route('/user/login').post((req, res) => {
-    
-    //unsure if this is specifically for angular or if react can use it too.
-  let header = req.headers['authorization'];
-  const bearer = header.split(' ');
-  const token = bearer[1];
-  if (token === 'undefined') {
-    var checkEmail = req.body.email;
-    var checkPassword = req.body.password;
+router.post("/", [
+    check("email", "Please include a valid email").isEmail(),
+    check("password", "Password is required").exists()
+  ],
+  //this is the responds
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
-    User.findOne({ email: checkEmail }, (err, user) => {
+    const { email, password } = req.body;
+
+    try {
+      //does the user exists?
+      let user = await User.findOne({ email });
+
       if (!user) {
-        return res.status(401).send('Login Failed, User not found');
-      } if (user) {
-        let passwordMatch = shService.comparePasswords(checkPassword, user.password);
-        if (passwordMatch) {
-          let token = authService.signUser(user); // created token
-          // res.cookie('jwt', token);
-          res.json({
-            userId: user._id,
-            admin: user.admin,
-            token: token
-          });
-          console.log('Successful login! Welcome Friend!!');
-        } else {
-          console.log('Incorrect Password');
-          res.send('Incorrect Password');
-        }
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "Invalid email or password" }] });
       }
-    });
-  } else {
-    res.status(401);
-    res.send('User is already logged in');
+
+      /*  does the email & password match the user.id? 
+                comparing plain text to encrypted 
+            */
+      const isMatch = await bcyrpt.compare(password, user.password);
+
+      if (!isMatch) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "Invalid email or password" }] });
+      }
+
+      //return jsw
+      const payload = {
+        user: {
+          id: user.id
+        }
+      };
+
+      jwt.sign(
+        payload,
+        config.get("jwtSecret"),
+        { expiresIn: 3600 },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      );
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server error");
+    }
   }
-});
-
-
-
-//POST route
-router.post('/', async (req, res) => {
-  // Hash Passwords
-  let salt = await bcrypt.genSalt(10);
-  let hashedPassword = await bcrypt.hash(req.body.password, salt);
-
-  const data = new User({
-      email: req.body.email,
-      password: hashedPassword
-  })
-
-  const savedUser = await data.save();
-  res.send(savedUser);
-});
-
-// PUT route
-router.put("/:id", async (req, res) => {});
-
-// DELETE route
-router.delete("/:id", async (req, res) => {});
+);
 
 module.exports = router;
