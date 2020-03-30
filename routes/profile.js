@@ -30,32 +30,6 @@ router.get('/me', async (req, res) => {
     }
   });
 
-// router.get('/me', async (req, res) => {
-
-//     try {
-//         const profile = await Profile.findOne({ user: req.body.id })
-//         // .populate(
-//         //     'user',
-//         //     ['email']);
-
-//         if (!profile) {
-//             res.send(400).json({ msg: 'There is no profile for this user' });
-//         }
-
-//         console.log("Test1")
-
-//         res.json(profile);
-
-//     } catch (err) {
-//         console.error(err.message);
-//         res.status(500).send('Server Error');
-//     }
-// });
-
-// router.get("/", async (req, res) => {
-//     const profile = await Profile.find().sort("userId");
-//     res.send(profile);
-// })
 
 // POST route
 router.post("/", auth, async (req, res) => {
