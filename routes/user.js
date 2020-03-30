@@ -21,6 +21,8 @@ router.post('/', async (req, res) => {
     let hashedPassword = await bcrypt.hash(req.body.password, salt);
   
     const data = new User({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         email: req.body.email,
         password: hashedPassword
     })
