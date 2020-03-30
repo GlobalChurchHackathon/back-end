@@ -15,16 +15,19 @@ router.get("/", async (req, res) => {
   res.send(users);
 });
 
-//POST route
 router.post('/', async (req, res) => {
-  // Hash Passwords
-  let salt = await bcrypt.genSalt(10);
-  let hashedPassword = await bcrypt.hash(req.body.password, salt);
-
-  const data = new User({
-      email: req.body.email,
-      password: hashedPassword
-  })
+    // Hash Passwords
+    let salt = await bcrypt.genSalt(10);
+    let hashedPassword = await bcrypt.hash(req.body.password, salt);
+  
+    const data = new User({
+        email: req.body.email,
+        password: hashedPassword
+    })
+  
+    const savedUser = await data.save();
+    res.send(savedUser);
+  });
 
 // PUT route
 router.put("update/:id", async (req, res) => {
@@ -41,10 +44,6 @@ router.put("update/:id", async (req, res) => {
     })
     .catch(err => res.status(400).json('Error: ' + err));
 
-});
-
-  const savedUser = await data.save();
-  res.send(savedUser);
 });
 
 
