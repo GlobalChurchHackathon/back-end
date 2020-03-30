@@ -9,11 +9,27 @@
   + lastName
   + location
   + phoneNumber
+* RequestSchema:
+  + title
+  + description
+  + isClaimed (Boolean)
+* ChurchSchema:
+  + name
+  + email
+  + website
+  + address1
+  + address2
+  + city
+  + state
+  + zipCode
+  + social media (2 fields)
 
 ## API Endpoints 
 * localhost:4000 - Get Route ("Hello World")
 * localhost:4000/users - Get Route (Get All Users)
 * localhost:4000/users - Post Route (Add New User)
+* localhost:4000/requests - Get Route (Get All Requests)
+* localhost:4000/requests - Post Route (Add New Request)
 
 ## How to Use
 1. Clone to your local machine
