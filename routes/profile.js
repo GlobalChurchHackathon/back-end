@@ -25,8 +25,8 @@ router.post("/",  async (req, res) => {
 
         const profile = new Profile ({
             _id: req.body.id,
-            // firstName: req.user.firstName,
-            // lastName: req.user.lastName,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
             address1: req.body.address1,
             address2: req.body.address2,
             city: req.body.city,
