@@ -20,6 +20,7 @@ app.use((req, res, next) => {
 
 const userRoutes = require("../back-end/routes/user");
 const profileRoutes = require("../back-end/routes/profile");
+const requestRoutes = require("../back-end/routes/request");
 
 app.get('/', (req, res) => {
   return res.send('Hello World!');
@@ -27,6 +28,7 @@ app.get('/', (req, res) => {
 
 app.use('/users', userRoutes);
 app.use('/profiles', profileRoutes);
+app.use('/requests', requestRoutes);
 
 dotenv.config();
 
