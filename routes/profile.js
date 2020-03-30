@@ -24,9 +24,9 @@ router.post("/",  async (req, res) => {
         console.log("test1")
 
         const profile = new Profile ({
-            user: req.body.id,
-            firstName: req.user.firstName,
-            lastName: req.user.lastName,
+            _id: req.body.id,
+            // firstName: req.user.firstName,
+            // lastName: req.user.lastName,
             address1: req.body.address1,
             address2: req.body.address2,
             city: req.body.city,
