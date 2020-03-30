@@ -27,6 +27,7 @@
 ## API Endpoints 
 * localhost:4000 - Get Route ("Hello World")
 * localhost:4000/users - Get Route (Get All Users)
+* localhost:4000/users/:userId - Get Route (Get Single User)
 * localhost:4000/users - Post Route (Add New User)
 * localhost:4000/requests - Get Route (Get All Requests)
 * localhost:4000/requests - Post Route (Add New Request)
