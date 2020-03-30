@@ -1,17 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const auth = require('../middleware/auth');
 const bcrypt = require('bcryptjs');
-
 
 const User = require("../models/User");
 
-// GET route
+// GET route - All Users
 router.get("/", async (req, res) => {
   const users = await User.find().sort("email");
   res.send(users);
 });
 
+// Get route - Single User
+
+// Post Route - Add New User
 router.post('/', async (req, res) => {
   // Hash Passwords
   let salt = await bcrypt.genSalt(10);
@@ -38,7 +39,7 @@ router.post('/', async (req, res) => {
     res.send(savedUser);
   });
 
-// PUT route
+// PUT route - Update Existing User
 router.put("update/:id", async (req, res) => {
     User.findById(req.params.id)
     .then(users => {
@@ -55,28 +56,7 @@ router.put("update/:id", async (req, res) => {
 
 });
 
-
-
-//finds user
-
-//@route    GET api/auth
-//@desc     Test route
-//@access   public
-router.get('/login', auth, async (req, res) => {
-    try {
-        const user = await User.findById(req.user.id).select('-password');
-        res.json(user);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server Error');
-    }
-});
-
-module.exports = router;
-// PUT route
-router.put("/:id", async (req, res) => {});
-
-// DELETE route
+// DELETE route - Delete Existing User
 router.delete("/:id", async (req, res) => {});
 
 module.exports = router;
