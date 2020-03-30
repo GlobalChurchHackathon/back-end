@@ -11,6 +11,10 @@ const RequestSchema = new mongoose.Schema({
     },
     isClaimed: {
         type: Boolean,
+    },
+    location: {
+        type: Array,
+        required: true
     }
 })
 module.exports = User = mongoose.model('request', RequestSchema);
