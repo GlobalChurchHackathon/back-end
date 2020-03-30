@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const auth = require('../../middleware/auth');
-const bcyrpt = require('bcryptjs');
+const auth = require('../middleware/auth');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
@@ -15,16 +15,19 @@ router.get("/", async (req, res) => {
   res.send(users);
 });
 
-//POST route
 router.post('/', async (req, res) => {
-  // Hash Passwords
-  let salt = await bcrypt.genSalt(10);
-  let hashedPassword = await bcrypt.hash(req.body.password, salt);
-
-  const data = new User({
-      email: req.body.email,
-      password: hashedPassword
-  })
+    // Hash Passwords
+    let salt = await bcrypt.genSalt(10);
+    let hashedPassword = await bcrypt.hash(req.body.password, salt);
+  
+    const data = new User({
+        email: req.body.email,
+        password: hashedPassword
+    })
+  
+    const savedUser = await data.save();
+    res.send(savedUser);
+  });
 
 // PUT route
 router.put("update/:id", async (req, res) => {
@@ -41,10 +44,6 @@ router.put("update/:id", async (req, res) => {
     })
     .catch(err => res.status(400).json('Error: ' + err));
 
-});
-
-  const savedUser = await data.save();
-  res.send(savedUser);
 });
 
 
@@ -97,7 +96,7 @@ router.post(
             /*  does the email & password match the user.id? 
                 comparing plain text to encrypted 
             */
-            const isMatch = await bcyrpt.compare(password, user.password);
+            const isMatch = await bcrypt.compare(password, user.password);
 
             if (!isMatch) {
                 return res
