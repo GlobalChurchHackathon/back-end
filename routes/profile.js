@@ -23,7 +23,7 @@ router.get('/me', async (req, res) => {
       }
   
       // only populate from user document if profile exists
-      res.json(profile.populate('user', ['name', 'avatar']));
+      res.json(profile.populate('user', ['firstName', 'lastName']));
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
