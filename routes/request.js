@@ -22,4 +22,11 @@ router.get("/", async (req, res) => {
     res.send(savedRequest);
   });
 
+// DELETE Route
+router.delete("/:id", (req, res) => {
+  Request.findByIdAndDelete(req.params.id)
+  .then(() =>res.json('Request deleted.'))
+  .catch(err => res.status(400).json('Error: ' + err));
+})
+
   module.exports = router;
