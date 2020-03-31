@@ -33,9 +33,9 @@
 * User Routes
   + localhost:4000/users - Get Route (Get All Users)
   + localhost:4000/users/:userId - Get Route (Get Single User)
-  + localhost:4000/users/:userId - Put Route (Update Existing User)
+  + localhost:4000/users/update/:userId - Put Route (Update Existing User)
   + localhost:4000/users/:userId - Delete Route (Delete Existing User)
-  + localhost:4000/signup - Post Route (Add New User)
+  + localhost:4000/users - Post Route (Add New User)
   + localhost:4000/login - Post Route (Login Existing User)
   + localhost:4000/logout - Post Route (Logout Existing User)
 
