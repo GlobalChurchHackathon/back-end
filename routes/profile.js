@@ -10,7 +10,28 @@ const Profile = require('../models/Profile');
 //     const profile = await Profile.find().sort("name");
 //     res.send(profile);
 // })
-
+router.get("/", async (req, res) => {
+    const users = await Profile.find();
+    res.send(users);
+  });
+  
+router.get('/me', async (req, res) => {
+    try {
+      const profile = await Profile.findOne({
+        user: req.body.id
+      });
+  
+      if (!profile) {
+        return res.status(400).json({ msg: 'There is no profile for this user' });
+      }
+  
+      // only populate from user document if profile exists
+      res.json(profile.populate('user', ['name', 'avatar']));
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  });
 
 router.post("/",  async (req, res) => {
     const {error} = validationResult(req.body);
