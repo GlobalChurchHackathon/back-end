@@ -9,12 +9,23 @@ const { check, validationResult } = require('express-validator');
 
 const User = require("../models/User");
 
-// GET route
+// GET route - Get All Users
 router.get("/", async (req, res) => {
   const users = await User.find().sort("email");
   res.send(users);
 });
 
+// Get User - Get Single User
+router.get("/:userId", async (req, res) => {
+    try {
+      const user = await User.findById(req.params.userId);
+      res.send(user)
+    } catch (err) {
+      res.json({ message: err })
+    }
+  });
+
+// Post route - Add New User
 router.post('/', async (req, res) => {
     // Hash Passwords
     let salt = await bcrypt.genSalt(10);
@@ -29,9 +40,10 @@ router.post('/', async (req, res) => {
     res.send(savedUser);
   });
 
+
 // PUT route
-router.put("update/:id", async (req, res) => {
-    User.findById(req.params.id)
+router.put("update/:userId", async (req, res) => {
+    User.findById(req.params.userId)
     .then(users => {
         users.firstName = req.body.firstName;
         users.lastName = req.body.lastName;
