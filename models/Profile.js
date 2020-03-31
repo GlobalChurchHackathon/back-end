@@ -7,14 +7,12 @@ const ProfileSchema = new mongoose.Schema({
         ref: 'user'
     },
     firstName: {
- POST-profile-routes
         type: mongoose.Schema.Types.String,
         ref: 'user'
     },
     lastName: {
         type: mongoose.Schema.Types.String,
         ref: 'user'
-
     },
     address1: {
         type: String,
