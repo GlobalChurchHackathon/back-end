@@ -33,7 +33,7 @@
 * User Routes
   + localhost:4000/users - Get Route (Get All Users)
   + localhost:4000/users/:userId - Get Route (Get Single User)
-  + localhost:4000/users/:userId - Patch Route (Patch Existing User)
+  + localhost:4000/users/:userId - Put Route (Update Existing User)
   + localhost:4000/users/:userId - Delete Route (Delete Existing User)
   + localhost:4000/signup - Post Route (Add New User)
   + localhost:4000/login - Post Route (Login Existing User)
@@ -42,13 +42,13 @@
 * Request Routes
   + localhost:4000/requests - Get Route (Get All Requests)
   + localhost:4000/requests/:requestId - Get Route (Get Single Request)
-  + localhost:4000/requests/:requestId - Patch Route (Patch Existing Request)
+  + localhost:4000/requests/:requestId - Put Route (Update Existing Request)
   + localhost:4000/requests/:requestId - Delete Route (Delete Existing Request)
 
 * Profile Routes
   + localhost:4000/profiles - Get Route (Get All Profiles)
   + localhost:4000/profiles/:profileId - Get Route (Get Single Profile)
-  + localhost:4000/profiles/:profileId - Patch Route (Patch Existing Profile)
+  + localhost:4000/profiles/:profileId - Put Route (Update Existing Profile)
   + localhost:4000/profiles/:profileId - Delete Route (Delete Existing Profile)
 
 ## How to Use
