@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 
 // login route - compare passwords and return JWT 
 // token with _id and admin fields - secured
-router.route('/users/login').post((req, res) => {
+router.post('/', (req, res) => {
   let header = req.headers['authorization'];
   const bearer = header.split(' ');
   const token = bearer[1];
