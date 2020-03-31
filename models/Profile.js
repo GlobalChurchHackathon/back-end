@@ -7,10 +7,12 @@ const ProfileSchema = new mongoose.Schema({
         ref: 'user'
     },
     firstName: {
-        type: String,
+        type: mongoose.Schema.Types.String,
+        ref: 'user'
     },
     lastName: {
-        type: String,
+        type: mongoose.Schema.Types.String,
+        ref: 'user'
     },
     address1: {
         type: String,
