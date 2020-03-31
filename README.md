@@ -4,16 +4,52 @@
 * UserSchema
   + email
   + password
+
 * ProfileSchema:
   + firstName
   + lastName
   + location
   + phoneNumber
 
+* RequestSchema:
+  + title
+  + description
+  + isClaimed (Boolean)
+
+* ChurchSchema:
+  + name
+  + email
+  + website
+  + address1
+  + address2
+  + city
+  + state
+  + zipCode
+  + social media (2 fields)
+
 ## API Endpoints 
 * localhost:4000 - Get Route ("Hello World")
-* localhost:4000/users - Get Route (Get All Users)
-* localhost:4000/users - Post Route (Add New User)
+
+* User Routes
+  + localhost:4000/users - Get Route (Get All Users)
+  + localhost:4000/users/:userId - Get Route (Get Single User)
+  + localhost:4000/users/:userId - Patch Route (Patch Existing User)
+  + localhost:4000/users/:userId - Delete Route (Delete Existing User)
+  + localhost:4000/signup - Post Route (Add New User)
+  + localhost:4000/login - Post Route (Login Existing User)
+  + localhost:4000/logout - Post Route (Logout Existing User)
+
+* Request Routes
+  + localhost:4000/requests - Get Route (Get All Requests)
+  + localhost:4000/requests/:requestId - Get Route (Get Single Request)
+  + localhost:4000/requests/:requestId - Patch Route (Patch Existing Request)
+  + localhost:4000/requests/:requestId - Delete Route (Delete Existing Request)
+
+* Profile Routes
+  + localhost:4000/profiles - Get Route (Get All Profiles)
+  + localhost:4000/profiles/:profileId - Get Route (Get Single Profile)
+  + localhost:4000/profiles/:profileId - Patch Route (Patch Existing Profile)
+  + localhost:4000/profiles/:profileId - Delete Route (Delete Existing Profile)
 
 ## How to Use
 1. Clone to your local machine
