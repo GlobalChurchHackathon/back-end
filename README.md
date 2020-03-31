@@ -40,13 +40,13 @@
   + localhost:4000/logout - Post Route (Logout Existing User)
 
 * Request Routes
-  + localhost:4000/requests - Get Route (Get All Users)
-  + localhost:4000/requests/:requestId - Get Route (Get Single User)
+  + localhost:4000/requests - Get Route (Get All Requests)
+  + localhost:4000/requests/:requestId - Get Route (Get Single Request)
   + localhost:4000/requests/:requestId - Patch Route (Patch Existing Request)
   + localhost:4000/requests/:requestId - Delete Route (Delete Existing Request)
 
 * Profile Routes
-  + localhost:4000/profiles - Get Route (Get All Users)
+  + localhost:4000/profiles - Get Route (Get All Profiles)
   + localhost:4000/profiles/:profileId - Get Route (Get Single Profile)
   + localhost:4000/profiles/:profileId - Patch Route (Patch Existing Profile)
   + localhost:4000/profiles/:profileId - Delete Route (Delete Existing Profile)
