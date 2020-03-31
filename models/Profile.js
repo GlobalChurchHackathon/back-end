@@ -1,17 +1,20 @@
 const mongoose = require('mongoose');
 
 const ProfileSchema = new mongoose.Schema({
-    _id: {
+
+    id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     },
     firstName: {
+ POST-profile-routes
         type: mongoose.Schema.Types.String,
         ref: 'user'
     },
     lastName: {
         type: mongoose.Schema.Types.String,
         ref: 'user'
+
     },
     address1: {
         type: String,
