@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const auth = require('../middleware/auth');
 
 const User = '../models/User';
 const Profile = '../models/Profile';
@@ -11,7 +12,7 @@ router.get("/", async (req, res) => {
 })
 
 // POST route
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
     const {error} = validationResult(req.body);
 
     if(error){
