@@ -1,15 +1,37 @@
 const express = require('express');
 const router = express.Router();
-// const auth = require('../middleware/auth');
 
-const User = '../models/User';
-const Profile = '../models/Profile';
+const auth = require('../middleware/auth');
+const { check, validationResult } = require('express-validator');
+
+
+const User = require("../models/User");
+const Profile = require("../models/Profile");
 
 // GET route
 router.get("/", async (req, res) => {
-    const profile = await Profile.find().sort("userId");
-    res.send(profile);
-})
+    const users = await Profile.find();
+    res.send(users);
+  });
+  
+router.get('/me', async (req, res) => {
+    try {
+      const profile = await Profile.findOne({
+        user: req.body.id
+      });
+  
+      if (!profile) {
+        return res.status(400).json({ msg: 'There is no profile for this user' });
+      }
+  
+      // only populate from user document if profile exists
+      res.json(profile.populate('user', ['firstName', 'lastName']));
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  });
+
 
 // POST route
 // router.post("/", auth, async (req, res) => {
