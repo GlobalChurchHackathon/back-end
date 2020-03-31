@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 
 const User = require("../models/User");
 const Profile = require("../models/Profile");
+
 // GET route
 router.get("/", async (req, res) => {
   const users = await User.find().sort("email");
@@ -35,14 +36,6 @@ router.post('/', async (req, res) => {
     res.send(savedUser);
   });
 
-  const data = new User({
-      email: req.body.email,
-      password: hashedPassword
-  })
-  
-  const savedUser = await data.save();
-  res.send(savedUser);
-});
 
 // PUT route
 router.put("/update/:id", (req, res) => {
@@ -59,9 +52,6 @@ router.put("/update/:id", (req, res) => {
     })
     .catch(err => res.status(400).json('Error: ' + err));
 });
-
- 
-
 
 // DELETE route
 router.delete("/:id", async (req, res) => {
