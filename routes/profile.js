@@ -15,23 +15,46 @@ router.get("/", async (req, res) => {
     res.send(users);
   });
   
+// router.get('/me', async (req, res) => {
+//     try {
+//       const profile = await Profile.findOne({
+//         user: req.body.id
+//       });
+  
+//       if (!profile) {
+//         return res.status(400).json({ msg: 'There is no profile for this user' });
+//       }
+  
+//       // only populate from user document if profile exists
+//       res.json(profile.populate('user', ['name', 'avatar']));
+//     } catch (err) {
+//       console.error(err.message);
+//       res.status(500).send('Server Error');
+//     }
+//   });
+
+  // @route    GET api/profile/me
+// @desc     Get current users profile
+// @access   Private
 router.get('/me', async (req, res) => {
-    try {
-      const profile = await Profile.findOne({
-        user: req.body.id
-      });
-  
-      if (!profile) {
-        return res.status(400).json({ msg: 'There is no profile for this user' });
-      }
-  
-      // only populate from user document if profile exists
-      res.json(profile.populate('user', ['name', 'avatar']));
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server Error');
+  try {
+    const profile = await Profile.findOne({
+      // user: req.user.id
+      user: req.body.user
+    });
+
+    if (!profile) {
+      return res.status(400).json({ msg: 'There is no profile for this user' });
     }
-  });
+
+    // only populate from user document if profile exists
+    res.json(profile.populate('user', ['firstName', 'lastName']));
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 
 router.post("/",  async (req, res) => {
     const {error} = validationResult(req.body);
@@ -45,7 +68,7 @@ router.post("/",  async (req, res) => {
         console.log("test1")
 
         const profile = new Profile ({
-            _id: req.body.id,
+            user: req.body.user,
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             address1: req.body.address1,
