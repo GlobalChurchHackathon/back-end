@@ -1,19 +1,18 @@
 const mongoose = require('mongoose');
 
 const ProfileSchema = new mongoose.Schema({
-
-    id: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
     },
-    firstName: {
-        type: mongoose.Schema.Types.String,
-        ref: 'user'
-    },
-    lastName: {
-        type: mongoose.Schema.Types.String,
-        ref: 'user'
-    },
+    // firstName: {
+    //     type: mongoose.Schema.Types.String,
+    //     ref: 'user'
+    // },
+    // lastName: {
+    //     type: mongoose.Schema.Types.String,
+    //     ref: 'user'
+    // },
     address1: {
         type: String,
         required: true,
