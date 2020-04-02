@@ -3,13 +3,17 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose')
 const app = express();
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser');
 
 // Middleware 
 app.use(bodyParser.json());
+app.use(cookieParser());
+
 
 const userRoutes = require("../back-end/routes/user");
 const profileRoutes = require("../back-end/routes/profile");
 const requestRoutes = require("../back-end/routes/request");
+const loginRoute = require("../back-end/routes/login");
 
 app.get('/', (req, res) => {
   return res.send('Hello World!');
@@ -18,6 +22,7 @@ app.get('/', (req, res) => {
 app.use('/users', userRoutes);
 app.use('/profiles', profileRoutes);
 app.use('/requests', requestRoutes);
+app.use('/login', loginRoute);
 
 dotenv.config();
 
