@@ -13,13 +13,13 @@ router.get("/", async (req, res) => {
 
 // Get User - Get Single User
 router.get("/:userId", async (req, res) => {
-    try {
-      const user = await User.findById(req.params.userId);
-      res.send(user)
-    } catch (err) {
-      res.json({ message: err })
-    }
-  });
+  try {
+    const user = await User.findById(req.params.userId);
+    res.send(user)
+  } catch (err) {
+    res.json({ message: err })
+  }
+});
 
 // Post route - Add New User
 router.post('/', async (req, res) => {
@@ -29,27 +29,29 @@ router.post('/', async (req, res) => {
   let hashedPassword2 = await bcrypt.hash(req.body.password2, salt);
 
   const data = new User({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: hashedPassword,
-      password2: hashedPassword2
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    password: hashedPassword,
+    password2: hashedPassword2,
+    isAdmin: req.body.isAdmin
+
   })
-    const savedUser = await data.save();
-    res.send(savedUser);
-  });
+  const savedUser = await data.save();
+  res.send(savedUser);
+});
 
 
 // PUT route
 router.put("/update/:id", (req, res) => {
-    User.findById(req.params.id)
+  User.findById(req.params.id)
     .then(users => {
-        users.firstName = req.body.firstName;
-        users.lastName = req.body.lastName;
-        users.email = req.body.email;
-        users.password = req.body.password;
+      users.firstName = req.body.firstName;
+      users.lastName = req.body.lastName;
+      users.email = req.body.email;
+      users.password = req.body.password;
 
-        users.save()
+      users.save()
         .then(() => res.json('User updated!'))
         .catch(err => res.status(400).json('Error: ' + err));
     })
@@ -59,8 +61,8 @@ router.put("/update/:id", (req, res) => {
 // DELETE route
 router.delete("/:id", async (req, res) => {
   User.findByIdAndDelete(req.params.id)
-  .then(() =>res.json('User deleted.'))
-  .catch(err => res.status(400).json('Error: ' + err));
+    .then(() => res.json('User deleted.'))
+    .catch(err => res.status(400).json('Error: ' + err));
 });
 
 module.exports = router;
