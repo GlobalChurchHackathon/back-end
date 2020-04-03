@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose')
 const app = express();
 const bodyParser = require("body-parser");
+const cookieParser = require('cookie-parser');
 
 // Middleware 
 app.use(cors());
@@ -17,10 +18,14 @@ app.use((req, res, next) => {
   }
   next();
 });
+app.use(cookieParser());
+
 
 const userRoutes = require("../back-end/routes/user");
 const profileRoutes = require("../back-end/routes/profile");
 const requestRoutes = require("../back-end/routes/request");
+const authRoute = require("../back-end/routes/auth");
+const churchRoute = require("../back-end/routes/church");
 
 app.get('/', (req, res) => {
   return res.send('Hello World!');
@@ -29,6 +34,8 @@ app.get('/', (req, res) => {
 app.use('/users', userRoutes);
 app.use('/profiles', profileRoutes);
 app.use('/requests', requestRoutes);
+app.use('/auth', authRoute);
+app.use('/churches', churchRoute);
 
 dotenv.config();
 
