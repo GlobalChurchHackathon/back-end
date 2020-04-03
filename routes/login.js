@@ -43,6 +43,13 @@ router.post(
           .json({ errors: [{ msg: 'Invalid Credentials' }] });
       }
       console.log("Test5")
+
+      if (user.isAdmin == true) {
+        console.log("You are an admin!")
+      } else {
+        console.log("You are not an admin")
+      }
+
       const payload = {
         user: {
           id: user.id
