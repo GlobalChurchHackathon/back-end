@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "start": "nodemon server.js",
+    "front-end": "npm start --prefix front-end",
+    "dev": "concurrently \"npm run server\" \"npm run front-end\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix front-end && npm run build --prefix front-end"
   },
   "dependencies": {
@@ -22,6 +24,7 @@
     "mongoose": "^5.9.6"
   },
   "devDependencies": {
+    "concurrently": "^5.1.0",
     "nodemon": "^2.0.2"
   }
 }
